@@ -43,8 +43,10 @@ jobs:
         SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
         SERVER_IP: ${{secrets.SERVER_IP}}
       run: |
-        mkdir -p ~/.ssh/
+        cd 
+        mkdir -p .ssh/
         touch .ssh/id_rsa
+        ll .ssh
         echo $SSH_PRIVATE_KEY >> .ssh/id_rsa
         ssh-keyscan $SERVER_IP >> ~/.ssh/known_hosts
         ll .ssh
