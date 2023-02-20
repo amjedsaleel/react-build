@@ -51,6 +51,7 @@ jobs:
         ssh-keyscan $SERVER_IP >> ~/.ssh/known_hosts
     - name: test
       run: |
+        cat $HOME/.ssh/private
         pwd
         cd 
         ls -al
@@ -64,7 +65,7 @@ jobs:
         FRONT_PROJECT_PATH: ${{secrets.FRONT_PROJECT_PATH}}
         SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
       run: |
-        rsync -avz -e "ssh -i $HOME/.ssh/private" build/* $USER@$SERVER_IP:$FRONT_PROJECT_PATH
+        rsync -avz -e "ssh -i -i ${{ secrets.SSH_PRIVATE_KEY }}" build/* $USER@$SERVER_IP:$FRONT_PROJECT_PATH
 
 
       
