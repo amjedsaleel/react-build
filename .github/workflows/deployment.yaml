@@ -32,4 +32,10 @@ jobs:
     - name: Build
       run: npm run build
     
+    - name: Testing
+      run: |
+        node -v
+        ls -al
+      
+    
    
