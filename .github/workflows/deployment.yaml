@@ -46,10 +46,10 @@ jobs:
         cd 
         mkdir -p .ssh/
         touch .ssh/id_rsa
-        ll .ssh
+        ls .ssh
         echo $SSH_PRIVATE_KEY >> .ssh/id_rsa
         ssh-keyscan $SERVER_IP >> ~/.ssh/known_hosts
-        ll .ssh
+        ls .ssh
 
       
     
