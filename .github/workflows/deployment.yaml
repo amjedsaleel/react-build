@@ -49,6 +49,10 @@ jobs:
         echo $SSH_PRIVATE_KEY >> .ssh/private
         chmod 600 .ssh/private
         ssh-keyscan $SERVER_IP >> ~/.ssh/known_hosts
+    - name: test
+      run: |
+        pwd
+        cat .ssh/private
     - name: Deploy
       env:
         SERVER_IP: ${{secrets.SERVER_IP}}
