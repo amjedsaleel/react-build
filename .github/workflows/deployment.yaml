@@ -44,7 +44,7 @@ jobs:
         SERVER_IP: ${{secrets.SERVER_IP}}
       run: |
         cd 
-        mkdir .ssh/
+        mkdir .ssh
         touch .ssh/private
         echo $SSH_PRIVATE_KEY >> .ssh/private
         chmod 600 .ssh/private
@@ -56,7 +56,7 @@ jobs:
         ls -al
         cd .ssh
         ls -al
-        cat .ssh/private
+        cat private
     - name: Deploy
       env:
         SERVER_IP: ${{secrets.SERVER_IP}}
