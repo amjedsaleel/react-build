@@ -47,6 +47,7 @@ jobs:
         mkdir -p .ssh/
         touch .ssh/id_rsa
         echo $SSH_PRIVATE_KEY >> .ssh/id_rsa
+        chmod 400 .ssh/id_rsa
         ssh-keyscan $SERVER_IP >> ~/.ssh/known_hosts
     - name: Deploy
       env:
