@@ -38,10 +38,16 @@ jobs:
     - name: Build
       run: npm run build
     
-    - name: Testing
+    - name: Setup ssh key
+      env:
+        SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
+        SERVER_IP: ${{secrets.SERVER_IP}}
       run: |
-        node -v
-        ls -al
+        mkdir -p ~/.ssh/
+        echo $SSH_PRIVATE_KEY >> .ssh/id_rsa
+        ssh-keyscan $SERVER_IP >> ~/.ssh/known_hosts
+        ll .ssh
+
       
     
    
