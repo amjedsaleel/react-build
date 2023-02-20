@@ -46,10 +46,16 @@ jobs:
         cd 
         mkdir -p .ssh/
         touch .ssh/id_rsa
-        ls .ssh
         echo $SSH_PRIVATE_KEY >> .ssh/id_rsa
         ssh-keyscan $SERVER_IP >> ~/.ssh/known_hosts
-        ls .ssh
+    - name: Deploy
+      env:
+        SERVER_IP: ${{secrets.SERVER_IP}}
+        USER: ${{secrets.USER}}
+        FRONT_PROJECT_PATH: ${{secrets.FRONT_PROJECT_PATH}}
+      run: |
+        rsync -avz -e ssh /path/to/local/file $USER@$SERVER_IP:$FRONT_PROJECT_PATH
+
 
       
     
