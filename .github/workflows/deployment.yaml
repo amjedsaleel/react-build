@@ -45,9 +45,9 @@ jobs:
       run: |
         cd 
         mkdir -p .ssh/
-        touch .ssh/id_rsa
-        echo $SSH_PRIVATE_KEY >> .ssh/id_rsa
-        chmod 400 .ssh/id_rsa
+        touch .ssh/private
+        echo $SSH_PRIVATE_KEY >> .ssh/private
+        chmod 600 .ssh/private
         ssh-keyscan $SERVER_IP >> ~/.ssh/known_hosts
     - name: Deploy
       env:
@@ -56,7 +56,7 @@ jobs:
         FRONT_PROJECT_PATH: ${{secrets.FRONT_PROJECT_PATH}}
         SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
       run: |
-        rsync -avz -e "ssh -i $SSH_PRIVATE_KEY" build/* $USER@$SERVER_IP:$FRONT_PROJECT_PATH
+        rsync -avz -e "ssh -i $HOME/.ssh/private" build/* $USER@$SERVER_IP:$FRONT_PROJECT_PATH
 
 
       
