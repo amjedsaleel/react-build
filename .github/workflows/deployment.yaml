@@ -51,6 +51,7 @@ jobs:
         FRONT_PROJECT_PATH: ${{ secrets.FRONT_PROJECT_PATH }}
       run: |
         rsync -avz -e "ssh -o StrictHostKeyChecking=no" build/* $REMOTE_USER@$REMOTE_IP:/home/ubuntu/test
+        
 
 
       
