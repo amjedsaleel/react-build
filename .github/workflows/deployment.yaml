@@ -42,16 +42,15 @@ jobs:
     - name: Configure SSH key
       uses: webfactory/ssh-agent@v0.4.1
       with:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }} 
 
     - name: Deploy
       env:
-        SERVER_IP: ${{secrets.SERVER_IP}}
-        USER: ${{secrets.USER}}
-        FRONT_PROJECT_PATH: ${{secrets.FRONT_PROJECT_PATH}}
+        SERVER_IP: ${{ secrets.SERVER_IP }}
+        USER: ${ {secrets.USER }}
+        FRONT_PROJECT_PATH: ${{ secrets.FRONT_PROJECT_PATH }}
       run: |
-        # scp -o StrictHostKeyChecking=no -r build/* ubuntu@100.25.164.107:/home/ubuntu
-        rsync -avz -e "ssh -o StrictHostKeyChecking=no" build/* $USER@SERVER_IP:$FRONT_PROJECT_PATH
+        rsync -avz -e "ssh -o StrictHostKeyChecking=no" build/* $USER@100.25.164.107:$FRONT_PROJECT_PATH
 
 
       
