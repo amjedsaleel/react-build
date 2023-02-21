@@ -17,7 +17,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.17.3]
+        node-version: [14.17.3, 16]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -44,16 +44,6 @@ jobs:
       with:
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-    - name: test
-      run: |
-        cat $HOME/.ssh/id_rsa
-        pwd
-        cd 
-        ls -al
-        cd .ssh
-        pwd
-        ls -al
-        cat private
     - name: Deploy
       env:
         SERVER_IP: ${{secrets.SERVER_IP}}
