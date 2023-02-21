@@ -49,7 +49,7 @@ jobs:
         REMOTE_IP: ${{ secrets.REMOTE_IP }}
         FRONT_PROJECT_PATH: ${{ secrets.FRONT_PROJECT_PATH }}
       run: |
-        rsync -avz -e "ssh -o StrictHostKeyChecking=no" build/* ubuntu@$REMOTE_IP:/home/ubuntu/test
+        rsync -avz -e "ssh -o StrictHostKeyChecking=no" build/* ubuntu@$REMOTE_IP:$FRONT_PROJECT_PATH
 
 
 
