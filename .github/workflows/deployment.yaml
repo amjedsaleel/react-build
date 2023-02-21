@@ -47,10 +47,9 @@ jobs:
     - name: Deploy
       env:
         REMOTE_IP: ${{ secrets.REMOTE_IP }}
-        SERVER_USER: ${ {secrets.SERVER_USER }}
         FRONT_PROJECT_PATH: ${{ secrets.FRONT_PROJECT_PATH }}
       run: |
-        rsync -avz -e "ssh -o StrictHostKeyChecking=no" build/* $SERVER_USER@$REMOTE_IP:/home/ubuntu/test
+        rsync -avz -e "ssh -o StrictHostKeyChecking=no" build/* ubuntu@$REMOTE_IP:/home/ubuntu/test
 
 
 
