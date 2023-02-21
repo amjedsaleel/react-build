@@ -50,6 +50,7 @@ jobs:
         eval $(ssh-agent -s)
         echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
         echo $SSH_PRIVATE_KEY >> .ssh/id_rsa
+
     - name: test
       run: |
         cat $HOME/.ssh/id_rsa
@@ -67,7 +68,7 @@ jobs:
         FRONT_PROJECT_PATH: ${{secrets.FRONT_PROJECT_PATH}}
         SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
       run: |
-        rsync -avz -e "ssh" build/* $USER@$SERVER_IP:$FRONT_PROJECT_PATH
+        rsync -avz -e "ssh -o StrictHostKeyChecking=no" build/* $USER@$SERVER_IP:$FRONT_PROJECT_PATH
 
 
       
