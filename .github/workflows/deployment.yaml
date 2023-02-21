@@ -69,7 +69,7 @@ jobs:
         FRONT_PROJECT_PATH: ${{secrets.FRONT_PROJECT_PATH}}
         SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
       run: |
-        rsync -avz -e "ssh -o StrictHostKeyChecking=no" build/* $USER@$SERVER_IP:$FRONT_PROJECT_PATH
+        rsync -avz -e "ssh -i $HOME/.ssh/id_rsa  -o StrictHostKeyChecking=no" build/* $USER@$SERVER_IP:$FRONT_PROJECT_PATH
 
 
       
