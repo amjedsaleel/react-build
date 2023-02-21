@@ -39,18 +39,10 @@ jobs:
     - name: Build
       run: npm run build
     
-    - name: Setup ssh key
-      env:
-        SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
-        SERVER_IP: ${{secrets.SERVER_IP}}
-      run: |
-        cd 
-        mkdir .ssh
-        touch .ssh/private
-        eval $(ssh-agent -s)
-        echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
-        echo $SSH_PRIVATE_KEY >> .ssh/id_rsa
-        chmod 600 .ssh/id_rsa
+    - name: Configure SSH key
+      uses: webfactory/ssh-agent@v0.4.1
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
     - name: test
       run: |
@@ -69,7 +61,7 @@ jobs:
         FRONT_PROJECT_PATH: ${{secrets.FRONT_PROJECT_PATH}}
         SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
       run: |
-        rsync -avz -e "ssh -i $HOME/.ssh/id_rsa  -o StrictHostKeyChecking=no" build/* $USER@$SERVER_IP:$FRONT_PROJECT_PATH
+        rsync -avz -e "ssh -o StrictHostKeyChecking=no" build/* $USER@$SERVER_IP:$FRONT_PROJECT_PATH
 
 
       
