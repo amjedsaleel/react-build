@@ -46,11 +46,11 @@ jobs:
 
     - name: Deploy
       env:
-        SERVER_IP: ${{ secrets.SERVER_IP }}
-        USER: ${ {secrets.USER }}
+        REMOTE_IP: ${{ secrets.REMOTE_IP }}
+        REMOTE_USER: ${ {secrets.REMOTE_USER }}
         FRONT_PROJECT_PATH: ${{ secrets.FRONT_PROJECT_PATH }}
       run: |
-        rsync -avz -e "ssh -o StrictHostKeyChecking=no" build/* ubuntu@100.25.164.107:/home/ubuntu/test
+        rsync -avz -e "ssh -o StrictHostKeyChecking=no" build/* ubuntu@$REMOTE_IP:/home/ubuntu/test
 
 
       
