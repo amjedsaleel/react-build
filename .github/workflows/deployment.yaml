@@ -47,12 +47,12 @@ jobs:
         cd 
         mkdir .ssh
         touch .ssh/private
-        echo $SSH_PRIVATE_KEY >> .ssh/private
-        chmod 600 .ssh/private
-        ssh-keyscan $SERVER_IP >> ~/.ssh/known_hosts
+        eval $(ssh-agent -s)
+        echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+        echo $SSH_PRIVATE_KEY >> .ssh/id_rsa
     - name: test
       run: |
-        cat $HOME/.ssh/private
+        cat $HOME/.ssh/id_rsa
         pwd
         cd 
         ls -al
@@ -67,7 +67,7 @@ jobs:
         FRONT_PROJECT_PATH: ${{secrets.FRONT_PROJECT_PATH}}
         SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
       run: |
-        rsync -avz -e "ssh -i $HOME/.ssh/private" build/* $USER@$SERVER_IP:$FRONT_PROJECT_PATH
+        rsync -avz -e "ssh" build/* $USER@$SERVER_IP:$FRONT_PROJECT_PATH
 
 
       
