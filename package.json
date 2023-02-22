@@ -1,6 +1,6 @@
 {
   "name": "sample-react",
-  "homepage": "http://100.25.164.107/myteam",
+  "homepage": "myteam",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
