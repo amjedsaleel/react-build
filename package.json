@@ -1,5 +1,6 @@
 {
   "name": "sample-react",
+  "homepage": "myteam",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
